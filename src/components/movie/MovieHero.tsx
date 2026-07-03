@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { tmdbImage, IMAGE_SIZES } from '@/lib/constants';
 import { extractYear, formatRuntime, formatCurrency, getMetacriticColor, cn } from '@/lib/utils';
@@ -46,7 +48,7 @@ export function MovieHero({ movie, omdb, trailer }: MovieHeroProps) {
   return (
     <div className="relative">
       {/* Backdrop */}
-      <div className="relative w-full h-[45vh] min-h-[350px]">
+      <div className="relative w-full h-[45vh] min-h-87.5">
         <Image
           src={tmdbImage(movie.backdrop_path, IMAGE_SIZES.backdrop.original)}
           alt={movie.title}
@@ -55,16 +57,16 @@ export function MovieHero({ movie, omdb, trailer }: MovieHeroProps) {
           className="object-cover object-top"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-film-dark via-film-dark/60 to-film-dark/20" />
-        <div className="absolute inset-0 bg-gradient-to-r from-film-dark/50 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-film-dark via-film-dark/60 to-film-dark/20" />
+        <div className="absolute inset-0 bg-linear-to-r from-film-dark/50 to-transparent" />
       </div>
 
       {/* Content overlapping backdrop */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-56 relative z-10 pb-8">
         <div className="flex flex-col md:flex-row gap-8">
           {/* Poster */}
-          <div className="flex-shrink-0 mx-auto md:mx-0">
-            <div className="w-[220px] sm:w-[260px] md:w-[300px] aspect-[2/3] rounded-xl overflow-hidden shadow-2xl shadow-black/50 border border-film-border/30">
+          <div className="shrink-0 mx-auto md:mx-0">
+            <div className="w-55 sm:w-65 md:w-75 aspect-2/3 rounded-xl overflow-hidden shadow-2xl shadow-black/50 border border-film-border/30">
               <Image
                 src={tmdbImage(movie.poster_path, IMAGE_SIZES.poster.large)}
                 alt={movie.title}
