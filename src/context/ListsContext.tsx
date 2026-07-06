@@ -33,7 +33,7 @@ function buildActionMessage(action: 'added' | 'removed' | 'failed', listName: st
   }
 
   return {
-    kind: action === 'added' ? 'success' : 'warning' as const,
+    kind: action === 'added' ? ('success' as const) : ('warning' as const),
     title: `${action === 'added' ? 'Added to' : 'Removed from'} ${listName}`,
     message: title,
   };
