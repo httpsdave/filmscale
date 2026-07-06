@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { tmdbImage, IMAGE_SIZES } from '@/lib/constants';
 import { extractYear, formatRuntime, formatCurrency, getMetacriticColor, cn } from '@/lib/utils';
-import { RatingBadge } from '@/components/ui/RatingBadge';
 import { GenreTag } from '@/components/ui/GenreTag';
 import { TrailerButton } from '@/components/ui/TrailerModal';
 import { useLists } from '@/context/ListsContext';
@@ -125,41 +124,31 @@ export function MovieHero({ movie, omdb, trailer }: MovieHeroProps) {
             </div>
 
             {/* Rating cards */}
-            <div className="flex items-center gap-3 flex-wrap mb-5">
-              <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-film-card border border-film-border">
+            <div className="flex items-center gap-4 flex-wrap mb-5 text-sm">
+              <div className="flex items-center gap-2 text-film-text/90">
                 <span className="text-blue-400 text-lg">★</span>
-                <div>
-                  <div className="text-[10px] uppercase tracking-wider text-film-muted">TMDB</div>
-                  <div className="font-bold text-sm">{movie.vote_average.toFixed(1)}/10</div>
-                </div>
+                <span className="font-semibold">TMDB</span>
+                <span className="text-film-muted">{movie.vote_average.toFixed(1)}/10</span>
               </div>
               {imdbRating && (
-                <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-film-card border border-film-border">
-                  <span className="bg-yellow-500 text-black text-[10px] font-black px-1.5 py-0.5 rounded">IMDb</span>
-                  <div>
-                    <div className="text-[10px] uppercase tracking-wider text-film-muted">IMDB</div>
-                    <div className="font-bold text-sm">{imdbRating}/10</div>
-                  </div>
+                <div className="flex items-center gap-2 text-film-text/90">
+                  <span className="rounded-sm border border-yellow-500/40 px-1.5 py-0.5 text-[10px] font-black uppercase tracking-wide text-yellow-300">IMDb</span>
+                  <span className="font-semibold">IMDb</span>
+                  <span className="text-film-muted">{imdbRating}/10</span>
                 </div>
               )}
               {metacritic !== null && (
-                <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-film-card border border-film-border">
-                  <span className={cn('text-xs font-bold px-1.5 py-0.5 rounded', getMetacriticColor(metacritic))}>
-                    {metacritic}
-                  </span>
-                  <div>
-                    <div className="text-[10px] uppercase tracking-wider text-film-muted">METACRITIC</div>
-                    <div className="font-bold text-sm">{metacritic}/100</div>
-                  </div>
+                <div className="flex items-center gap-2 text-film-text/90">
+                  <span className={cn('text-sm font-bold', getMetacriticColor(metacritic))}>{metacritic}</span>
+                  <span className="font-semibold">Metacritic</span>
+                  <span className="text-film-muted">{metacritic}/100</span>
                 </div>
               )}
               {rtScore && (
-                <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-film-card border border-film-border">
+                <div className="flex items-center gap-2 text-film-text/90">
                   <span className="text-lg">🍅</span>
-                  <div>
-                    <div className="text-[10px] uppercase tracking-wider text-film-muted">ROTTEN TOMATOES</div>
-                    <div className="font-bold text-sm">{rtScore}</div>
-                  </div>
+                  <span className="font-semibold">Rotten Tomatoes</span>
+                  <span className="text-film-muted">{rtScore}</span>
                 </div>
               )}
             </div>
@@ -185,8 +174,8 @@ export function MovieHero({ movie, omdb, trailer }: MovieHeroProps) {
                 className={cn(
                   'flex items-center gap-2 px-4 py-2.5 rounded-lg border text-sm font-medium transition-all cursor-pointer',
                   isInWatchlist(movie.id)
-                    ? 'border-blue-500 bg-blue-500/10 text-blue-400'
-                    : 'border-film-border text-film-muted hover:border-blue-500 hover:text-blue-400'
+                    ? 'border-yellow-500 bg-yellow-500/10 text-yellow-500'
+                    : 'border-film-border text-film-muted hover:border-yellow-500 hover:text-yellow-500'
                 )}
               >
                 <svg className="w-4 h-4" fill={isInWatchlist(movie.id) ? 'currentColor' : 'none'} viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

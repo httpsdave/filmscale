@@ -5,6 +5,8 @@ import './globals.css';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { ScrollToTop } from '@/components/layout/ScrollToTop';
+import { NotificationProvider } from '@/context/NotificationContext';
+import { NotificationToasts } from '@/components/ui/NotificationToasts';
 import { ListsProvider } from '@/context/ListsContext';
 
 const inter = Inter({
@@ -46,15 +48,18 @@ export default function RootLayout({
         {/* Background Collage for plain pages */}
         <div className="fixed inset-0 z-[-1] pointer-events-none">
           <img src="/collage.jpg" alt="" className="w-full h-full object-cover opacity-[0.03]" />
-          <div className="absolute inset-0 bg-gradient-to-b from-film-dark/80 via-film-dark/50 to-film-dark" />
+          <div className="absolute inset-0 bg-linear-to-b from-film-dark/80 via-film-dark/50 to-film-dark" />
         </div>
 
-        <ListsProvider>
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
-          <ScrollToTop />
-        </ListsProvider>
+        <NotificationProvider>
+          <ListsProvider>
+            <Navbar />
+            <main className="flex-1">{children}</main>
+            <Footer />
+            <ScrollToTop />
+            <NotificationToasts />
+          </ListsProvider>
+        </NotificationProvider>
       </body>
     </html>
   );

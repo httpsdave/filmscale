@@ -59,7 +59,7 @@ export function MovieCard({ movie, priority = false }: MovieCardProps) {
               </button>
               <button
                 onClick={() => toggleWatchlist(listItem)}
-                className={`p-2 rounded-full transition-colors ${isInWatchlist(movie.id) ? 'bg-blue-500 text-white' : 'bg-black/60 text-white hover:bg-blue-500'}`}
+                className={`p-2 rounded-full transition-colors ${isInWatchlist(movie.id) ? 'bg-yellow-500 text-black' : 'bg-black/60 text-white hover:bg-yellow-500 hover:text-black'}`}
                 title="Watchlist"
               >
                 <svg className="w-4 h-4" fill={isInWatchlist(movie.id) ? 'currentColor' : 'none'} viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
