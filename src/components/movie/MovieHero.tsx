@@ -7,6 +7,7 @@ import { tmdbImage, IMAGE_SIZES } from '@/lib/constants';
 import { extractYear, formatRuntime, formatCurrency, getMetacriticColor, cn } from '@/lib/utils';
 import { GenreTag } from '@/components/ui/GenreTag';
 import { TrailerButton } from '@/components/ui/TrailerModal';
+import { WatchNowButton } from '@/components/ui/WatchNowModal';
 import { useLists } from '@/context/ListsContext';
 import type { TMDBMovieDetails, TMDBVideo, OMDbMovie } from '@/lib/types';
 import { extractRottenTomatoesScore, extractMetacriticScore, extractImdbRating } from '@/lib/omdb';
@@ -198,6 +199,7 @@ export function MovieHero({ movie, omdb, trailer }: MovieHeroProps) {
                 </svg>
                 Watched
               </button>
+              <WatchNowButton movieId={movie.id} movieTitle={movie.title} variant="primary" />
               {trailer && (
                 <TrailerButton videoKey={trailer.key} title={trailer.name} variant="primary" />
               )}

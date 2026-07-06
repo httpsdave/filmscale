@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { tmdbImage, IMAGE_SIZES, GENRE_MAP } from '@/lib/constants';
 import { RatingBadge } from '@/components/ui/RatingBadge';
 import { TrailerButton } from '@/components/ui/TrailerModal';
+import { WatchNowButton } from '@/components/ui/WatchNowModal';
 import type { TMDBMovie, TMDBVideo } from '@/lib/types';
 
 interface HeroBannerProps {
@@ -92,6 +93,7 @@ export function HeroBanner({ movies, videos = {} }: HeroBannerProps) {
 
           {/* Action buttons */}
           <div className="flex items-center gap-4 flex-wrap">
+            <WatchNowButton movieId={movie.id} movieTitle={movie.title} variant="primary" />
             {trailer && (
               <TrailerButton videoKey={trailer.key} title={trailer.name} variant="primary" />
             )}
