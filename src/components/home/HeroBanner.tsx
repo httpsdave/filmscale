@@ -17,6 +17,7 @@ interface HeroBannerProps {
 export function HeroBanner({ movies, videos = {} }: HeroBannerProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isTrailerOpen, setIsTrailerOpen] = useState(false);
 
   const featured = movies.slice(0, 5);
   const movie = featured[currentIndex];
@@ -31,11 +32,12 @@ export function HeroBanner({ movies, videos = {} }: HeroBannerProps) {
   }, [currentIndex]);
 
   useEffect(() => {
+    if (isTrailerOpen) return;
     const timer = setInterval(() => {
       goTo((currentIndex + 1) % featured.length);
     }, 8000);
     return () => clearInterval(timer);
-  }, [currentIndex, featured.length, goTo]);
+  }, [currentIndex, featured.length, goTo, isTrailerOpen]);
 
   if (!movie) return null;
 
@@ -95,7 +97,7 @@ export function HeroBanner({ movies, videos = {} }: HeroBannerProps) {
           <div className="flex items-center gap-4 flex-wrap">
             <WatchNowButton movieId={movie.id} movieTitle={movie.title} variant="primary" />
             {trailer && (
-              <TrailerButton videoKey={trailer.key} title={trailer.name} variant="primary" />
+              <TrailerButton videoKey={trailer.key} title={trailer.name} variant="primary" onOpenChange={setIsTrailerOpen} />
             )}
             <Link
               href={`/movie/${movie.id}`}

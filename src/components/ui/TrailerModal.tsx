@@ -58,15 +58,26 @@ interface TrailerButtonProps {
   title?: string;
   variant?: 'primary' | 'secondary';
   className?: string;
+  onOpenChange?: (isOpen: boolean) => void;
 }
 
-export function TrailerButton({ videoKey, title, variant = 'primary', className }: TrailerButtonProps) {
+export function TrailerButton({ videoKey, title, variant = 'primary', className, onOpenChange }: TrailerButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleOpen = () => {
+    setIsOpen(true);
+    onOpenChange?.(true);
+  };
+
+  const handleClose = () => {
+    setIsOpen(false);
+    onOpenChange?.(false);
+  };
 
   return (
     <>
       <button
-        onClick={() => setIsOpen(true)}
+        onClick={handleOpen}
         className={cn(
           'inline-flex items-center gap-2 font-semibold rounded-lg transition-all duration-200 cursor-pointer',
           variant === 'primary'
@@ -85,7 +96,7 @@ export function TrailerButton({ videoKey, title, variant = 'primary', className 
         videoKey={videoKey}
         title={title}
         isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
+        onClose={handleClose}
       />
     </>
   );
